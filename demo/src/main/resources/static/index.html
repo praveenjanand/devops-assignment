@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to DEV OPS Assignment</h1>
+		<h3>Group-48</h3>
+	<!--<h4><label for="searchAttribute">Select Attribute:</label>
+    <select id="searchAttribute">
+        <option value="attribute1">Filter By Primary Skill</option>
+        <option value="attribute2">Filter By Experience</option>
+         Add more options as needed 
+    </select>
+	<input type="text" id="searchInput" placeholder="Enter a search term"></h4>
+	<button onclick="searchMongoDB()">Search</button>
+	<button onclick="refreshPage()">Show All Resumes</button>-->
+    </header>
+
+    
+
+    <main>
+        <ection>
+			
+          <!--  <h2>Overview of Cloud Computing</h2>
+            <p>Cloud computing is a technology that allows users to access and use computing resources (such as servers, storage, databases, networking, software) over the internet, often provided by third-party providers. It enables on-demand availability of resources, scalability to handle varying workloads, and eliminates the need for organizations to invest in and maintain their own physical infrastructure. Users can pay for the resources they consume, making it a flexible and cost-effective solution for various applications and services.</p>
+			-->
+			
+			<span id = "defaultresults" ">
+			<h3>Please find the available resumes. </h3>
+            <button  onclick="redirectToNewPage1()" ">Praveen J Anand - 2023MT03132</button>
+			<button  onclick="redirectToNewPage2()" ">Vishnuvarthan N - 2023MT03047</button>
+			<button  onclick="redirectToNewPage3()" ">Shashank A - 2023MT03028</button>
+			<button onclick="redirectToNewPage4()" ">Giridhara Guptha V R - 2023MT03075</button>
+			<button  onclick="redirectToNewPage5()" ">Vishaal Aravinth - 2023MT03115</button>
+			</span>
+			
+			<span id = "results" style="display: none;">
+			<h3>Please find the resumes based on search criteria</h3>
+            <button id = "praveen" onclick="redirectToNewPage1()" style="display: none;">Praveen J Anand - 2023MT03132</button>
+			<button id = "vishnu" onclick="redirectToNewPage2()" style="display: none;">Vishnuvarthan N - 2023MT03047</button>
+			<button id = "shashank" onclick="redirectToNewPage3()" style="display: none;">Shashank A - 2023MT03028</button>
+			<button id = "giri" onclick="redirectToNewPage4()" style="display: none;">Giridhara Guptha V R - 2023MT03075</button>
+			<button id = "vishaal"  onclick="redirectToNewPage5()" style="display: none;">Vishaal Aravinth - 2023MT03115</button>
+			</span>
+			<span id = "noresults" style="display: none;"><h3><red>No resumes matched your search criteria. Please refine the search</red></h3></span>
+			<h2>Overview of Assignment</h2>
+			<p>We've developed our online resumes, hosted on a cloud cluster for enhanced availability and accessibility. Utilizing a public load balancer ensures easy access to the primary website. The cloud infrastructure offers seamless scalability, allowing us to expand when adding more resumes and scale down during idle periods, with no upfront costs and a pay-as-you-go model.</p>
+			<p>Integration with continuous integration/continuous deployment (CI/CD) via GitHub facilitates efficient updates to resumes, reducing downtime. Each resume operates independently, ensuring changes to one do not impact others. Moreover, this website can be utilized by companies to easily filter and identify resumes suitable for specific roles, streamlining the recruitment process. This comprehensive setup provides a robust, flexible, and cost-effective solution for managing and customizing online resumes to meet diverse needs.</p>
+			
+			
+        </section>
+    </main>
+
+    <script>
+		//Praveen resume page call
+        function redirectToNewPage1() {
+            window.location.href = "praveen.html";
+        }
+		//Vishu resume page call
+		function redirectToNewPage2() {
+            window.location.href = "vishnu.html";
+        }
+		//Shashank resume page call
+		function redirectToNewPage3() {
+            window.location.href = "shashank.html";
+        }
+		//Giri resume page call
+		function redirectToNewPage4() {
+            window.location.href = "giri.html";
+        }
+		//Vishaal resume page call
+		function redirectToNewPage5() {
+            window.location.href = "vishaal.html";
+        }
+        function refreshPage() {
+            location.reload(); // Reload the current page
+        }
+        
+
+        
+        function searchMongoDB() {
+            // Get the skill from the user (you may retrieve this value from an input field)
+            var apiUri = null;
+            document.getElementById("defaultresults").style.display = "none";
+             var textVal = document.getElementById("searchInput").value;
+			var selectElement = document.getElementById("searchAttribute");
+
+            // Get the selected value
+            var selectedValue = selectElement.value;			
+            
+             if (selectedValue=='attribute2') {
+			     var exp = textVal;
+			     apiUri = `/getCandidatesBySkill/experience/${exp}`;
+			} else {
+					 var skill = textVal;
+			     apiUri = `/getCandidatesBySkill/skills/${skill}`;
+			}
+            
+            // Make an asynchronous HTTP request using the Fetch API
+            fetch(apiUri)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json(); // Assuming the response is in JSON format
+                })
+                .then(data => {
+                    if (data && Array.isArray(data) && data.length > 0) {
+						document.getElementById("noresults").style.display = "none";
+
+						 document.getElementById("results").style.display = "block";
+						
+                        // Extract candidate names
+                        var candidateNames = data.map(candidate => candidate.name);
+						console.log(candidateNames);
+                        if (candidateNames.includes("praveen")) {
+                            document.getElementById("praveen").style.display = "block";
+                        } else {
+                            document.getElementById("praveen").style.display = "none";
+                        }
+                        if (candidateNames.includes("vishnu")) {
+                            document.getElementById("vishnu").style.display = "block";
+                        } else {
+                            document.getElementById("vishnu").style.display = "none";
+                        }
+                      if (candidateNames.includes("shashank")) {
+                            document.getElementById("shashank").style.display = "block";
+                        } else {
+                            document.getElementById("shashank").style.display = "none";
+                        }
+                        if (candidateNames.includes("giri")) {
+                            document.getElementById("giri").style.display = "block";
+                        } else {
+                            document.getElementById("giri").style.display = "none";
+                        }
+                      if (candidateNames.includes("vishaal")) {
+                            document.getElementById("vishaal").style.display = "block";
+                        } else {
+                            document.getElementById("vishaal").style.display = "none";
+                        }
+                    } else {
+						document.getElementById("results").style.display = "none";
+                      document.getElementById("noresults").style.display = "block";
+                     document.getElementById("praveen").style.display = "none";
+                     document.getElementById("shashank").style.display = "none";
+                     document.getElementById("giri").style.display = "none";
+                     document.getElementById("vishnu").style.display = "none";
+                     document.getElementById("vishaal").style.display = "none";  
+                    }
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error('Error:', error);
+                     document.getElementById("praveen").style.display = "none";
+                     document.getElementById("shashank").style.display = "none";
+                     document.getElementById("giri").style.display = "none";
+                     document.getElementById("vishnu").style.display = "none";
+                     document.getElementById("vishaal").style.display = "none";                     
+
+                });
+        }
+        
+    </script>
+
+</body>
+</html>
