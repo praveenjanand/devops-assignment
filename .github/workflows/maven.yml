@@ -34,6 +34,18 @@ jobs:
     - name: Run tests with Maven
       run: mvn -f demo/pom.xml test
 
+  lint:
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Run linting with Super-Linter
+      uses: github/super-linter@v4
+      env:
+        VALIDATE_JAVASCRIPT: true
+        DEFAULT_BRANCH: release-1.0
+
   sonar:
     runs-on: ubuntu-latest
     needs: [build, test]
