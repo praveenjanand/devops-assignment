@@ -36,12 +36,17 @@ jobs:
 
    runs-on: ubuntu-latest
    steps:
-      - uses: sonarsource/sonarcloud-github-action@v2
-        with:
-          # Replace with your SonarCloud project token
-          token: 38f7e6aef53b2125ea5fe48481b1fab174d63c54
-          # Customize analysis properties as needed
-          organization: praveenjanand
-          projectKey: praveenjanand
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Analyze with SonarCloud
+      uses: sonarsource/sonarcloud-github-action@v2
+      env:
+        SONAR_TOKEN: 38f7e6aef53b2125ea5fe48481b1fab174d63c54
 
 
