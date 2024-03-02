@@ -36,7 +36,7 @@ jobs:
 
    runs-on: ubuntu-latest
    steps:
-      - uses: sonarsource/sonarcloud-github-action@v3
+      - uses: sonarsource/sonarcloud-github-action@v2
         with:
           # Replace with your SonarCloud project token
           token: 38f7e6aef53b2125ea5fe48481b1fab174d63c54
