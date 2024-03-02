@@ -16,6 +16,8 @@
 	<description>Demo project for Dev OPS Assignment</description>
 	<properties>
 		<java.version>17</java.version>
+		  <sonar.organization>praveenjanand</sonar.organization>
+  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
