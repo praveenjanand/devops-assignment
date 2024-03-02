@@ -49,4 +49,4 @@ jobs:
     - name: Analyze with SonarCloud
       run: |
         cd demo
-        mvn sonar:sonar -Dsonar.projectKey=praveenjanand_devops-assignment -Dsonar.organization=praveenjanand -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=38f7e6aef53b2125ea5fe48481b1fab174d63c54 -Dsonar.java.binaries=./target/classes
+        mvn sonar:sonar -Dsonar.projectKey=praveenjanand_devops-assignment -Dsonar.organization=praveenjanand -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=38f7e6aef53b2125ea5fe48481b1fab174d63c54 -Dsonar.java.binaries=./demo/target/classes
