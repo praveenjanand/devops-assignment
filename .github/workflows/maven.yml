@@ -30,5 +30,18 @@ jobs:
     - name: Build with Maven
       run: mvn -f demo/pom.xml clean install
     - name: Run tests with Maven
-      run: mvn test
+      run: mvn -f demo/pom.xml test
+
+  sonar:
+
+   runs-on: ubuntu-latest
+   steps:
+      - uses: sonarsource/sonarcloud-github-action@v3
+        with:
+          # Replace with your SonarCloud project token
+          token: 38f7e6aef53b2125ea5fe48481b1fab174d63c54
+          # Customize analysis properties as needed
+          organization: praveenjanand
+          projectKey: praveenjanand
+
 
