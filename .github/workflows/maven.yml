@@ -46,6 +46,6 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Analyze with SonarCloud
-      run: mvn sonar:sonar -Dsonar.projectKey=praveenjanand -Dsonar.organization=praveenjanand -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=38f7e6aef53b2125ea5fe48481b1fab174d63c54
-
-
+      run: |
+        cd demo
+        mvn sonar:sonar -Dsonar.projectKey=praveenjanand -Dsonar.organization=praveenjanand -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=38f7e6aef53b2125ea5fe48481b1fab174d63c54
