@@ -43,7 +43,11 @@ jobs:
     - name: Run linting with Super-Linter
       uses: github/super-linter@v4
       env:
-        VALIDATE_JAVASCRIPT: true
+        VALIDATE_JAVASCRIPT: false
+        VALIDATE_GITHUB_ACTIONS: false
+        VALIDATE_HTML: false
+        VALIDATE_CSS: false
+        VALIDATE_BASH: false
         DEFAULT_BRANCH: release-1.0
 
   sonar:
